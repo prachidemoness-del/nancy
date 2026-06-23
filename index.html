@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Nancy ❤️</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:black;
+overflow:hidden;
+height:100vh;
+font-family:Georgia, serif;
+}
+
+#startScreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+#startBtn{
+padding:18px 35px;
+font-size:1.2rem;
+border:none;
+border-radius:50px;
+background:#ff4fa0;
+color:white;
+cursor:pointer;
+box-shadow:0 0 25px #ff4fa0;
+}
+
+.scene{
+position:relative;
+width:100%;
+height:100vh;
+perspective:1000px;
+overflow:hidden;
+}
+
+.text{
+position:absolute;
+white-space:nowrap;
+font-weight:bold;
+color:#ff9ac7;
+
+text-shadow:
+0 0 10px #ff69b4,
+0 0 20px #ff69b4,
+0 0 40px #ff69b4;
+
+animation:fly linear infinite;
+}
+
+.small{
+font-size:1rem;
+}
+
+.medium{
+font-size:1.8rem;
+}
+
+.big{
+font-size:4rem;
+color:white;
+}
+
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+opacity:.8;
+}
+
+.heart{
+position:absolute;
+font-size:20px;
+animation:floatHeart 8s linear infinite;
+}
+
+@keyframes fly{
+
+0%{
+transform:
+translateZ(-1500px)
+translateX(0px)
+translateY(0px);
+opacity:0;
+}
+
+10%{
+opacity:1;
+}
+
+90%{
+opacity:1;
+}
+
+100%{
+transform:
+translateZ(800px)
+translateX(-100px)
+translateY(-50px);
+opacity:0;
+}
+
+}
+
+@keyframes floatHeart{
+
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+
+20%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-100px);
+opacity:0;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="startScreen">
+<button id="startBtn">
+❤️ Open Birthday Surprise ❤️
+</button>
+</div>
+
+<div class="scene" id="scene"></div>
+
+<audio id="bgMusic" loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const scene = document.getElementById("scene");
+
+const messages = [
+
+"Happy Birthday Nancy 🎂",
+"Nancy ❤️",
+"I Love You ❤️",
+"Forever ❤️",
+"You Mean So Much To Me 💖",
+"My Favorite Person 🥰",
+"Best Birthday Ever ✨",
+"Happy Birthday My Love 🎉",
+"Forever And Always ❤️",
+"You're Special Nancy 💕"
+
+];
+
+for(let i=0;i<150;i++){
+
+const star=document.createElement("div");
+
+star.className="star";
+
+star.style.left=Math.random()*100+"%";
+star.style.top=Math.random()*100+"%";
+
+scene.appendChild(star);
+
+}
+
+function createText(){
+
+const text=document.createElement("div");
+
+text.classList.add("text");
+
+const r=Math.random();
+
+if(r>0.85){
+text.classList.add("big");
+}
+else if(r>0.5){
+text.classList.add("medium");
+}
+else{
+text.classList.add("small");
+}
+
+text.innerHTML=
+messages[Math.floor(Math.random()*messages.length)];
+
+text.style.left=Math.random()*100+"%";
+text.style.top=Math.random()*100+"%";
+
+text.style.animationDuration=
+(8+Math.random()*8)+"s";
+
+scene.appendChild(text);
+
+setTimeout(()=>{
+text.remove();
+},16000);
+
+}
+
+function createHeart(){
+
+const heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"%";
+
+heart.style.animationDuration=
+(5+Math.random()*5)+"s";
+
+scene.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},10000);
+
+}
+
+setInterval(createText,250);
+
+setInterval(createHeart,700);
+
+document.getElementById("startBtn")
+.addEventListener("click",()=>{
+
+document.getElementById("bgMusic").play();
+
+document.getElementById("startScreen")
+.style.display="none";
+
+});
+
+</script>
+
+</body>
+</html>
